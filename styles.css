@@ -259,18 +259,18 @@ nav ul li a:hover {
 }
 
 .image-bg-tilted {
-  width: 550px;
-  height: 550px;
+  width: 400px;
+  height: 500px;
   background: #56555f;
   border-radius: 5rem;
-  transform: rotate(-10deg);
+  transform: rotate(-15deg);
   position: absolute;
   z-index: 1;
 }
 
 .hero-portrait {
-  width: 480px;
-  height: 600px;
+  width: 400px;
+  height: 500px;
   object-fit: cover;
   z-index: 2;
   position: relative;
