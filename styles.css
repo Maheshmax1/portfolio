@@ -409,63 +409,105 @@ section h3::after {
 /* ================= SKILL CARDS ================= */
 .skills-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   margin-top: 2rem;
+}
+
+@media (max-width: 900px) {
+  .skills-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .skills-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 .grid-2-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  max-width: 600px;
+  gap: 2rem;
+  max-width: 800px;
   margin: 2rem auto;
 }
 
+@media (max-width: 600px) {
+  .grid-2-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
 .skill-card {
-  background: #ffffff;
-  padding: 1.5rem;
-  border-radius: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  padding: 2rem;
+  border-radius: 1.5rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #5b4beb, #0ea5e9);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
 
 .skill-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(91, 75, 235, 0.15);
+}
+
+.skill-card:hover::before {
+  transform: scaleX(1);
 }
 
 .skill-card i {
-  font-size: 2.5rem;
-  color: #5b4beb;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  background: linear-gradient(135deg, #5b4beb, #0ea5e9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover i {
+  transform: scale(1.1);
 }
 
 .skill-card h5 {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1e293b;
   margin-bottom: 0.5rem;
 }
 
-.skill-card .skill-percentage {
-  font-weight: 600;
-  color: #5b4beb;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.skill-card .progress-bar {
-  width: 100%;
-  height: 8px;
-  background: #e2e8f0;
-  border-radius: 10px;
-  margin-top: 0.5rem;
-  overflow: hidden;
+.skill-card h6 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-bottom: 1rem;
+  background: rgba(91, 75, 235, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
 }
 
 /* ================= STAR RATINGS ================= */
@@ -540,9 +582,193 @@ section h3::after {
 }
 
 .card-link {
-  margin-top: 1rem;
   color: #56555f;
   font-weight: 600;
+}
+
+/* ================= JOURNEY BENTO GRID ================= */
+.journey-wrapper {
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+}
+
+.journey-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.journey-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(91, 75, 235, 0.15);
+}
+
+.journey-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.journey-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.journey-content h4 {
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  color: #111;
+}
+
+.journey-content p {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Primary Card (Spans full width, image on left) */
+.journey-card.primary {
+  grid-column: span 12;
+  flex-direction: row;
+  align-items: center;
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  border: 1px solid rgba(91, 75, 235, 0.1);
+}
+
+.journey-card.primary .journey-img {
+  width: 50%;
+  height: 350px;
+  border-right: 4px solid #fff;
+}
+
+.journey-card.primary .journey-content {
+  padding: 3rem;
+  width: 50%;
+}
+
+.journey-card.primary .journey-content h4 {
+  font-size: 2rem;
+  color: #5b4beb;
+}
+
+.journey-card.primary .journey-content p {
+  font-size: 1.1rem;
+}
+
+/* Secondary Cards */
+.journey-card.secondary {
+  grid-column: span 4;
+}
+
+/* Achievement Card */
+.journey-card.achievement {
+  grid-column: span 4;
+  background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  text-align: center;
+}
+
+.journey-card.achievement .journey-content {
+  align-items: center;
+}
+
+.journey-card.achievement .journey-img {
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+  margin: 1.5rem auto 0;
+  border: 4px solid #fff;
+  box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);
+}
+
+.achievement-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #f59e0b;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+}
+
+/* Responsive adjustments for Journey Grid */
+@media (max-width: 950px) {
+  .journey-card.primary {
+    flex-direction: column;
+  }
+
+  .journey-card.primary .journey-img {
+    width: 100%;
+    height: 300px;
+    border-right: none;
+    border-bottom: 4px solid #fff;
+  }
+
+  .journey-card.primary .journey-content {
+    width: 100%;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .journey-card.secondary {
+    grid-column: span 6;
+  }
+
+  .journey-card.achievement {
+    grid-column: span 12;
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .journey-card.achievement .journey-content {
+    align-items: flex-start;
+  }
+
+  .journey-card.achievement .journey-img {
+    margin: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .journey-card.secondary,
+  .journey-card.primary,
+  .journey-card.achievement {
+    grid-column: span 12;
+  }
+
+  .journey-card.achievement {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .journey-card.achievement .journey-content {
+    align-items: center;
+  }
+
+  .journey-card.achievement .journey-img {
+    margin: 1.5rem auto 0;
+  }
 }
 
 /* ================= CONTACT ================= */
